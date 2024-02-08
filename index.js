@@ -3,30 +3,32 @@ function getComputerChoice() {
     return choices[Math.floor(Math.random()*choices.length)];
 }
 
-function playRound(c1, c2) {
-    c1 = c1.toLowerCase();
-    c2 = c2.toLowerCase();
-    if (c1 === c2) {
-        return 0;
-    } else if (c1 === "rock") {
-        if (c2 === "paper") {
-            return -1;
+function playRound(user, comp) {
+    comp = comp.toLowerCase();
+    user = user.toLowerCase();
+    var message = "";
+    if (user === comp) {
+        message = "Draw. You both chose " + c1;
+    } else if (user === "rock") {
+        if (comp === "paper") {
+            message = "You lost. " + computerSelection + " beats " + userSelection;
         } else {
-            return 1;
+            message = "You won. " + user + " beats " + comp;
         }
-    } else if (c1 === "paper") {
-        if (c2 === "scissors") {
-            return -1;
+    } else if (user === "paper") {
+        if (comp === "scissors") {
+            message = "You lost. " + computerSelection + " beats " + userSelection;
         } else {
-            return 1;
+            message = "You won. " + user + " beats " + comp;
         }
-    } else if (c1 === "scissors") {
-        if (c2 === "rock") {
-            return -1;
+    } else if (user === "scissors") {
+        if (comp === "rock") {
+            message = "You lost. " + computerSelection + " beats " + userSelection;
         } else {
-            return 1;
+            message = "You won. " + user + " beats " + comp;
         }
-    }
+    } 
+    displayResult(message);
 }
 
 var selections = document.querySelectorAll("img");
@@ -35,6 +37,11 @@ selections.forEach((selection) => {
         console.log(e.target.id);
     })
 })
+
+function displayResult(msg) {
+    var result = document.querySelector(".result");
+    result.textContent = msg;
+}
 
 // function playGame() {
 //     var userScore = 0;
